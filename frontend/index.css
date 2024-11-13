@@ -5,15 +5,21 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('https://i.kym-cdn.com/entries/icons/original/000/000/143/493654d1211481563d712575bc916c8953c1d645.jpg') center/cover;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://i.kym-cdn.com/photos/images/original/000/862/065/0e9.jpg') top left/25% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/017/618/pepefroggie.jpg') top right/25% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/027/269/Screen_Shot_2018-09-28_at_10.08.52_AM.jpg') bottom left/25% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/016/729/large.jpg') bottom right/25% no-repeat;
     font-family: 'Comic Sans MS', cursive;
 }
 
 .game-container {
     text-align: center;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     padding: 20px;
     border-radius: 10px;
+    border: 3px solid #ff69b4;
 }
 
 #gameCanvas {
@@ -38,6 +44,13 @@ body {
     margin-top: 20px;
 }
 
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+}
+
 button {
     background: #ff69b4;
     border: none;
@@ -47,13 +60,18 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Comic Sans MS', cursive;
-    margin: 10px;
 }
 
 button:hover {
     background: #ff1493;
     transform: scale(1.1);
     transition: all 0.2s;
+}
+
+button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
 }
 
 #highScores {

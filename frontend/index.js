@@ -11,9 +11,8 @@ class PongGame {
         this.paddleHeight = 60;
         this.ballSize = 10;
 
-        // AI settings
-        this.aiReactionSpeed = 0.1; // Lower = faster reactions
-        this.aiErrorMargin = 20; // Higher = more mistakes
+        this.aiReactionSpeed = 0.1;
+        this.aiErrorMargin = 20;
 
         this.player1 = {
             y: this.canvas.height / 2 - this.paddleHeight / 2,
@@ -36,24 +35,74 @@ class PongGame {
 
         this.keys = {};
         this.gameLoop = null;
+        this.isPaused = false;
+        this.isGameStarted = false;
+
         this.sounds = {
             hit: new Audio('https://www.myinstants.com/media/sounds/bonk.mp3'),
             score: new Audio('https://www.myinstants.com/media/sounds/mlg-airhorn.mp3')
         };
 
         this.setupEventListeners();
+        this.updateButtonStates();
     }
 
     setupEventListeners() {
         document.addEventListener('keydown', (e) => this.keys[e.key] = true);
         document.addEventListener('keyup', (e) => this.keys[e.key] = false);
         document.getElementById('startGame').addEventListener('click', () => this.start());
+        document.getElementById('pauseGame').addEventListener('click', () => this.togglePause());
+        document.getElementById('restartGame').addEventListener('click', () => this.restart());
+    }
+
+    updateButtonStates() {
+        const startBtn = document.getElementById('startGame');
+        const pauseBtn = document.getElementById('pauseGame');
+        const restartBtn = document.getElementById('restartGame');
+
+        startBtn.disabled = this.isGameStarted;
+        pauseBtn.disabled = !this.isGameStarted;
+        restartBtn.disabled = !this.isGameStarted;
+        
+        pauseBtn.textContent = this.isPaused ? 'Resume' : 'Pause';
     }
 
     start() {
         if (this.gameLoop) return;
+        this.isGameStarted = true;
+        this.isPaused = false;
         this.resetGame();
         this.gameLoop = setInterval(() => this.update(), 1000/60);
+        this.updateButtonStates();
+    }
+
+    togglePause() {
+        if (!this.isGameStarted) return;
+        
+        this.isPaused = !this.isPaused;
+        if (this.isPaused) {
+            clearInterval(this.gameLoop);
+            this.gameLoop = null;
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.fillStyle = '#fff';
+            this.ctx.font = '48px "Comic Sans MS"';
+            this.ctx.textAlign = 'center';
+            this.ctx.fillText('PAUSED', this.canvas.width/2, this.canvas.height/2);
+        } else {
+            this.gameLoop = setInterval(() => this.update(), 1000/60);
+        }
+        this.updateButtonStates();
+    }
+
+    restart() {
+        clearInterval(this.gameLoop);
+        this.gameLoop = null;
+        this.player1.score = 0;
+        this.player2.score = 0;
+        document.getElementById('player1-score').textContent = '0';
+        document.getElementById('player2-score').textContent = '0';
+        this.start();
     }
 
     resetGame() {
@@ -61,14 +110,14 @@ class PongGame {
         this.ball.y = this.canvas.height / 2;
         this.ball.speedX = 5 * (Math.random() > 0.5 ? 1 : -1);
         this.ball.speedY = 5 * (Math.random() > 0.5 ? 1 : -1);
+        this.player1.y = this.canvas.height / 2 - this.paddleHeight / 2;
+        this.player2.y = this.canvas.height / 2 - this.paddleHeight / 2;
     }
 
     updateAI() {
-        // Calculate ideal position for AI paddle
         const predictedY = this.ball.y + (this.aiErrorMargin * (Math.random() - 0.5));
         const paddleCenter = this.player1.y + (this.paddleHeight / 2);
         
-        // Add some delay to make AI more human-like
         if (Math.abs(paddleCenter - predictedY) > this.aiErrorMargin) {
             if (paddleCenter < predictedY) {
                 this.player1.y += this.player1.speed * this.aiReactionSpeed;
@@ -77,7 +126,6 @@ class PongGame {
             }
         }
 
-        // Keep AI paddle within bounds
         if (this.player1.y < 0) this.player1.y = 0;
         if (this.player1.y > this.canvas.height - this.paddleHeight) {
             this.player1.y = this.canvas.height - this.paddleHeight;
@@ -85,6 +133,7 @@ class PongGame {
     }
 
     update() {
+        if (this.isPaused) return;
         this.updateAI();
         this.movePlayer2();
         this.moveBall();
@@ -92,7 +141,6 @@ class PongGame {
     }
 
     movePlayer2() {
-        // Player 2 (Arrow Up/Down)
         if (this.keys['ArrowUp'] && this.player2.y > 0) {
             this.player2.y -= this.player2.speed;
         }
@@ -105,19 +153,16 @@ class PongGame {
         this.ball.x += this.ball.speedX;
         this.ball.y += this.ball.speedY;
 
-        // Wall collisions
         if (this.ball.y <= 0 || this.ball.y >= this.canvas.height) {
             this.ball.speedY *= -1;
             this.sounds.hit.play();
         }
 
-        // Paddle collisions
         if (this.checkPaddleCollision()) {
-            this.ball.speedX *= -1.1; // Increase speed slightly
+            this.ball.speedX *= -1.1;
             this.sounds.hit.play();
         }
 
-        // Scoring
         if (this.ball.x <= 0) {
             this.player2.score++;
             this.sounds.score.play();
@@ -143,6 +188,7 @@ class PongGame {
     async endGame(winner) {
         clearInterval(this.gameLoop);
         this.gameLoop = null;
+        this.isGameStarted = false;
         
         await backend.saveScore(winner, Math.max(this.player1.score, this.player2.score));
         this.updateHighScores();
@@ -152,6 +198,7 @@ class PongGame {
         this.player2.score = 0;
         document.getElementById('player1-score').textContent = '0';
         document.getElementById('player2-score').textContent = '0';
+        this.updateButtonStates();
     }
 
     async updateHighScores() {
@@ -162,14 +209,12 @@ class PongGame {
     }
 
     checkPaddleCollision() {
-        // AI paddle
         if (this.ball.x <= this.paddleWidth && 
             this.ball.y >= this.player1.y && 
             this.ball.y <= this.player1.y + this.paddleHeight) {
             return true;
         }
         
-        // Player paddle
         if (this.ball.x >= this.canvas.width - this.paddleWidth && 
             this.ball.y >= this.player2.y && 
             this.ball.y <= this.player2.y + this.paddleHeight) {
@@ -180,23 +225,19 @@ class PongGame {
     }
 
     draw() {
-        // Clear canvas
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Draw paddles
         this.ctx.fillStyle = '#ff69b4';
         this.ctx.fillRect(0, this.player1.y, this.paddleWidth, this.paddleHeight);
         this.ctx.fillRect(this.canvas.width - this.paddleWidth, this.player2.y, this.paddleWidth, this.paddleHeight);
 
-        // Draw ball
         this.ctx.beginPath();
         this.ctx.arc(this.ball.x, this.ball.y, this.ballSize, 0, Math.PI * 2);
         this.ctx.fillStyle = '#fff';
         this.ctx.fill();
         this.ctx.closePath();
 
-        // Draw center line
         this.ctx.setLineDash([5, 15]);
         this.ctx.beginPath();
         this.ctx.moveTo(this.canvas.width / 2, 0);
@@ -206,7 +247,6 @@ class PongGame {
     }
 }
 
-// Initialize game
 window.onload = () => {
     const game = new PongGame();
     game.updateHighScores();
