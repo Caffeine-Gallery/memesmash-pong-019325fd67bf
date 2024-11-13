@@ -6,20 +6,42 @@ body {
     align-items: center;
     min-height: 100vh;
     background: 
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://i.kym-cdn.com/photos/images/original/000/862/065/0e9.jpg') top left/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/017/618/pepefroggie.jpg') top right/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/027/269/Screen_Shot_2018-09-28_at_10.08.52_AM.jpg') bottom left/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/016/729/large.jpg') bottom right/25% no-repeat;
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        /* Row 1 */
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/143/493654d1211481563d712575bc916c8953c1d645.jpg') top left/20% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/017/618/pepefroggie.jpg') top center/20% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/027/269/Screen_Shot_2018-09-28_at_10.08.52_AM.jpg') top right/20% no-repeat,
+        /* Row 2 */
+        url('https://i.kym-cdn.com/entries/icons/original/000/016/729/large.jpg') center left/20% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/newsfeed/000/096/044/trollface.jpg') center center/20% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/091/TrollFace.jpg') center right/20% no-repeat,
+        /* Row 3 */
+        url('https://i.kym-cdn.com/entries/icons/original/000/031/051/cover4.jpg') bottom left/20% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg') bottom center/20% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/019/649/OK_thumb.jpg') bottom right/20% no-repeat,
+        /* Additional layers with absolute positioning */
+        url('https://i.kym-cdn.com/entries/icons/original/000/002/819/karp.jpg') 10% 40%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/004/403/Girls.png') 30% 20%/15% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/101/771/1879f18e_e542_e1c6.jpg') 50% 60%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/745/success.jpg') 70% 30%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/003/619/ForeverAlone.jpg') 90% 50%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/005/180/YaoMingMeme.jpg') 20% 80%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/006/026/NOTSUREIF.jpg') 40% 70%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/010/496/Overly_attached_GF.jpg') 60% 40%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/009/217/1912-so-much-win.jpg') 80% 90%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/007/edward.jpg') 95% 15%/15% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/011/187/Naamloos-1.png') 15% 95%/15% no-repeat;
     font-family: 'Comic Sans MS', cursive;
+    background-color: #000;
 }
 
 .game-container {
     text-align: center;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.95);
     padding: 20px;
     border-radius: 10px;
     border: 3px solid #ff69b4;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
 }
 
 #gameCanvas {
