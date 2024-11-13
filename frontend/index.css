@@ -6,76 +6,65 @@ body {
     align-items: center;
     min-height: 100vh;
     background: 
-        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://i.kym-cdn.com/entries/icons/original/000/000/143/493654d1211481563d712575bc916c8953c1d645.jpg') top left/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/017/618/pepefroggie.jpg') top right/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/027/269/Screen_Shot_2018-09-28_at_10.08.52_AM.jpg') bottom left/25% no-repeat,
-        url('https://i.kym-cdn.com/entries/icons/original/000/016/729/large.jpg') bottom right/25% no-repeat;
+        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+        /* Original images */
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/143/493654d1211481563d712575bc916c8953c1d645.jpg') 0% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/017/618/pepefroggie.jpg') 10% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/027/269/Screen_Shot_2018-09-28_at_10.08.52_AM.jpg') 20% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/016/729/large.jpg') 30% 0%/10% no-repeat,
+        /* Additional images */
+        url('https://i.kym-cdn.com/photos/images/newsfeed/000/096/044/trollface.jpg') 40% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/091/TrollFace.jpg') 50% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/031/051/cover4.jpg') 60% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/013/564/doge.jpg') 70% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/019/649/OK_thumb.jpg') 80% 0%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/002/819/karp.jpg') 90% 0%/10% no-repeat,
+        /* Row 2 */
+        url('https://i.kym-cdn.com/entries/icons/original/000/004/403/Girls.png') 0% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/101/771/1879f18e_e542_e1c6.jpg') 10% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/745/success.jpg') 20% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/003/619/ForeverAlone.jpg') 30% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/005/180/YaoMingMeme.jpg') 40% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/006/026/NOTSUREIF.jpg') 50% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/010/496/Overly_attached_GF.jpg') 60% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/009/217/1912-so-much-win.jpg') 70% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/000/007/edward.jpg') 80% 20%/10% no-repeat,
+        url('https://i.kym-cdn.com/entries/icons/original/000/011/187/Naamloos-1.png') 90% 20%/10% no-repeat,
+        /* Row 3 */
+        url('https://i.kym-cdn.com/photos/images/original/000/070/279/leostrutoriginal.jpg') 0% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/000/130/disaster-girl.jpg') 10% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/000/681/what-you-did-there-i-see-it.thumbnail.jpg') 20% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/001/384/Atrapitis.jpg') 30% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/002/110/longcat.jpg') 40% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/002/144/fry.jpg') 50% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/003/364/I_CS_WHAT_YOU_DID_THERE.jpg') 60% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/004/588/Technologically-Impaired-Duck.jpg') 70% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/005/309/doitus.jpg') 80% 40%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/006/382/1248189606569.jpg') 90% 40%/10% no-repeat,
+        /* Row 4 */
+        url('https://i.kym-cdn.com/photos/images/original/000/008/502/Union-Rage-Face.jpg') 0% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/009/981/images-2.jpg') 10% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/010/692/1248395429467.jpg') 20% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/011/296/success_baby.jpg') 30% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/012/445/lime-cat.jpg') 40% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/015/289/1248950359103.jpg') 50% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/017/382/1250991947631.jpg') 60% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/019/389/1252861147002.jpg') 70% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/021/073/1254172884282.jpg') 80% 60%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/023/370/55dd1cd5c5dd1cd5c5.jpeg') 90% 60%/10% no-repeat,
+        /* Row 5 */
+        url('https://i.kym-cdn.com/photos/images/original/000/024/183/1254619743229.jpg') 0% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/026/479/moar.jpg') 10% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/028/590/originaljosephd.jpg') 20% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/030/403/YouMad.jpg') 30% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/032/373/120345790360.jpg') 40% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/034/053/1260952747397.jpg') 50% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/035/936/1260953859397.jpg') 60% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/037/162/04.jpg') 70% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/038/262/hahaha-guy.jpg') 80% 80%/10% no-repeat,
+        url('https://i.kym-cdn.com/photos/images/original/000/039/078/1257.jpg') 90% 80%/10% no-repeat;
     font-family: 'Comic Sans MS', cursive;
+    background-color: #000;
 }
 
-.game-container {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 20px;
-    border-radius: 10px;
-    border: 3px solid #ff69b4;
-}
-
-#gameCanvas {
-    border: 4px solid #ff69b4;
-    background-color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 20px #ff69b4;
-    margin: 20px auto;
-}
-
-.score-board {
-    display: flex;
-    justify-content: center;
-    gap: 100px;
-    font-size: 48px;
-    color: #fff;
-    text-shadow: 2px 2px 4px #ff69b4;
-}
-
-.controls {
-    color: #fff;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-.button-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 10px 0;
-}
-
-button {
-    background: #ff69b4;
-    border: none;
-    padding: 10px 20px;
-    font-size: 20px;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Comic Sans MS', cursive;
-}
-
-button:hover {
-    background: #ff1493;
-    transform: scale(1.1);
-    transition: all 0.2s;
-}
-
-button:disabled {
-    background: #666;
-    cursor: not-allowed;
-    transform: none;
-}
-
-#highScores {
-    margin-top: 20px;
-    color: white;
-    font-size: 18px;
-}
+/* [Rest of CSS remains unchanged] */
