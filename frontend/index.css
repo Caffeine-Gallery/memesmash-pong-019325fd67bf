@@ -5,12 +5,15 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('https://i.imgur.com/ZFVMcHH.jpg') center/cover;
+    background: url('https://i.kym-cdn.com/entries/icons/original/000/000/143/493654d1211481563d712575bc916c8953c1d645.jpg') center/cover;
     font-family: 'Comic Sans MS', cursive;
 }
 
 .game-container {
     text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 #gameCanvas {

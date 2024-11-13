@@ -11,6 +11,10 @@ class PongGame {
         this.paddleHeight = 60;
         this.ballSize = 10;
 
+        // AI settings
+        this.aiReactionSpeed = 0.1; // Lower = faster reactions
+        this.aiErrorMargin = 20; // Higher = more mistakes
+
         this.player1 = {
             y: this.canvas.height / 2 - this.paddleHeight / 2,
             score: 0,
@@ -59,21 +63,35 @@ class PongGame {
         this.ball.speedY = 5 * (Math.random() > 0.5 ? 1 : -1);
     }
 
+    updateAI() {
+        // Calculate ideal position for AI paddle
+        const predictedY = this.ball.y + (this.aiErrorMargin * (Math.random() - 0.5));
+        const paddleCenter = this.player1.y + (this.paddleHeight / 2);
+        
+        // Add some delay to make AI more human-like
+        if (Math.abs(paddleCenter - predictedY) > this.aiErrorMargin) {
+            if (paddleCenter < predictedY) {
+                this.player1.y += this.player1.speed * this.aiReactionSpeed;
+            } else {
+                this.player1.y -= this.player1.speed * this.aiReactionSpeed;
+            }
+        }
+
+        // Keep AI paddle within bounds
+        if (this.player1.y < 0) this.player1.y = 0;
+        if (this.player1.y > this.canvas.height - this.paddleHeight) {
+            this.player1.y = this.canvas.height - this.paddleHeight;
+        }
+    }
+
     update() {
-        this.movePaddles();
+        this.updateAI();
+        this.movePlayer2();
         this.moveBall();
         this.draw();
     }
 
-    movePaddles() {
-        // Player 1 (W/S)
-        if (this.keys['w'] && this.player1.y > 0) {
-            this.player1.y -= this.player1.speed;
-        }
-        if (this.keys['s'] && this.player1.y < this.canvas.height - this.paddleHeight) {
-            this.player1.y += this.player1.speed;
-        }
-
+    movePlayer2() {
         // Player 2 (Arrow Up/Down)
         if (this.keys['ArrowUp'] && this.player2.y > 0) {
             this.player2.y -= this.player2.speed;
@@ -126,13 +144,10 @@ class PongGame {
         clearInterval(this.gameLoop);
         this.gameLoop = null;
         
-        // Save score to backend
         await backend.saveScore(winner, Math.max(this.player1.score, this.player2.score));
-        
-        // Update high scores display
         this.updateHighScores();
         
-        alert(`Player ${winner} wins!`);
+        alert(winner === 1 ? "AI wins!" : "You win!");
         this.player1.score = 0;
         this.player2.score = 0;
         document.getElementById('player1-score').textContent = '0';
@@ -143,18 +158,18 @@ class PongGame {
         const scores = await backend.getHighScores();
         const highScoresDiv = document.getElementById('highScores');
         highScoresDiv.innerHTML = '<h3>High Scores</h3>' + 
-            scores.map(score => `<div>Player ${score.player}: ${score.score}</div>`).join('');
+            scores.map(score => `<div>${score.player === 1 ? 'AI' : 'Player'}: ${score.score}</div>`).join('');
     }
 
     checkPaddleCollision() {
-        // Player 1 paddle
+        // AI paddle
         if (this.ball.x <= this.paddleWidth && 
             this.ball.y >= this.player1.y && 
             this.ball.y <= this.player1.y + this.paddleHeight) {
             return true;
         }
         
-        // Player 2 paddle
+        // Player paddle
         if (this.ball.x >= this.canvas.width - this.paddleWidth && 
             this.ball.y >= this.player2.y && 
             this.ball.y <= this.player2.y + this.paddleHeight) {
